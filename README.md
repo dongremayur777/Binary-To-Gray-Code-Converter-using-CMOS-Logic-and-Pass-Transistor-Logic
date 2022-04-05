@@ -2,19 +2,15 @@
 
   * [Abstract](#abstract)
   * [Reference Truth Table](#reference-truth-table)
-  * [Modification of Equations](#Minimized_Equations)
-  * [Formation of Minimized Circuit](#Minimized_Circuit)
+  * [Modification of Equations](#minimized-equations)
+  * [Kmaps](#kmaps)
+  * [Formation of Minimized Circuit](#minimized-circuit)
   * [Tools Used](#tools-used)
-- [Simulation in ESIM](#simulation-in-esim)
-  * [Verilog_Code](#verilog_code)
-  * [Makerchip_Block](#makerchip_block)
-  * [Schematic_Model](#schematic_model)
   * [Netlist](#netlist)
-  * [Waveforms](#waveforms)
-  * [Using_Gaw](#using_gaw)
+  * [Ngspice Output Waveforms](#ngspice-output-waveforms)
   * [Conclusion](#conclusion)
   * [Author](#author)
-  * [Acknowledgement](#acknowlegement)
+  * [Acknowledgement](#acknowledgement)
   * [References](#references)
 
 
@@ -33,6 +29,14 @@ Gray code is the most popular of the unit distance codes, but it is not suitable
 ![IMG_20220405_162058](https://user-images.githubusercontent.com/59500283/161821592-86df7a61-3f95-4efa-8b93-4131234bca7f.jpg)
 
 ![IMG_20220405_162148](https://user-images.githubusercontent.com/59500283/161821638-50d19ca7-05ff-4fae-90f6-82c13ff68fe6.jpg)
+
+## Kmaps
+
+
+![G0_Kmap](https://user-images.githubusercontent.com/59500283/161847052-df6d40b2-1cea-4ad7-95f0-64e88fb98e00.jpeg)
+![G1_Kmap](https://user-images.githubusercontent.com/59500283/161847160-2f1fc9f7-4f22-4fdd-8c8b-6463e79caf4a.jpeg)
+![G2_Kmap](https://user-images.githubusercontent.com/59500283/161847171-4ef300f5-0534-4a56-a359-7752a643c840.jpeg)
+![G3_Kmap](https://user-images.githubusercontent.com/59500283/161847183-94f1582f-f480-4bac-b162-e1d6cc0390f8.jpeg)
 
 
 ## Minimized Circuit 
@@ -55,111 +59,154 @@ Step-1 : Numbering the Elements According to the rules.
 ![IMG_20220405_164759](https://user-images.githubusercontent.com/59500283/161823729-73c7d250-7a6d-4515-a705-51c0529aff2b.jpg)
 
 
-Step-2 : Recognize the Sub-Circuits and Writing Netlist for them.
+Step-2 : Recognize the Sub-Circuits and Numbering them.
 
 ![IMG_20220405_165339](https://user-images.githubusercontent.com/59500283/161823787-3868b128-9a02-4584-a8a3-b5908d8751b4.jpg)
 
+Step-3 : Writing the Netlist for each Sub-Circuit and merging them according to the Circuit.
 
 ## Netlist
 
+**Binary To Grey Code Conversion
+.subckt inverter 1 2 3
+mp 2 1 3 3 pmod w=100u l=1u
+mn 2 1 0 0 nmod w=40u l=1u
+.model pmod pmos Vto=-1V Kp=80u
+.model nmod nmos Vto=1V Kp=200u
+.ends
 
+.subckt pass_and 1 2 3 4
+m1 1 2 4 4 nmod w=40u l=1u
+m2 2 3 4 4 nmod w=40u l=1u
+.model nmod nmos Vto=1 Kp=200u
+.ends
 
-## Makerchip_Block
-<img width="1440" alt="Screenshot 2022-03-07 at 8 43 52 PM" src="https://user-images.githubusercontent.com/59500283/157091147-2f2f0d22-ba91-4351-9cd7-7bc3939535d7.png">
+.subckt pass_xor 1 2 3 4 5
+m1 1 4 5 5 nmod w=40u l=1u
+m2 3 2 5 5 nmod w=40u l=1u
+.model nmod nmos Vto=1V Kp=200u
+.ends
 
-
-Using NGVeri and the above Verilog Code We Create the 3_Bit_Wallace Model.
-
-## Schematic_Model
-
-The Mixed Signal Circuit is made up of Two Parts Digital and Analog.
-In this case the Wallace Model is Digital Part and the ADC DAC Bridge is Analog Part in the Schematic.
-
-<img width="1346" alt="Screenshot 2022-03-07 at 8 04 00 PM" src="https://user-images.githubusercontent.com/59500283/157094037-2ddcece6-f239-4c77-9935-6e3b7d5460d0.png">
-
-After Drawing the Schematic we generate a netlist and then we use a KICAD to NGSPICE Converter
-
-## Netlist
-
-* /home/bt19ece016/esim-workspace/wallace/wallace.cir
-
-* u2  net-_u2-pad1_ net-_u2-pad2_ net-_u2-pad3_ net-_u2-pad4_ net-_u2-pad5_ net-_u2-pad6_ net-_u2-pad7_ net-_u2-pad8_ net-_u2-pad9_ net-_u2-pad10_ net-_u2-pad11_ net-_u2-pad12_ mayur_wallace
-* u8  a2 a1 a0 b2 b1 b0 net-_u2-pad1_ net-_u2-pad2_ net-_u2-pad3_ net-_u2-pad4_ net-_u2-pad5_ net-_u2-pad6_ adc_bridge_6
-v1  a2 gnd pulse(0 5 0 0.1m 0.1m 5 10)
-v2  a1 gnd pulse(0 5 0 0.1m 0.1m 10 20)
-v3  a0 gnd pulse(0 5 0 0.1m 0.1m 20 40)
-v4  b2 gnd pulse(0 5 0 0.1m 0.1m 5 10)
-v5  b1 gnd pulse(0 5 0 0.1m 0.1m 10 20)
-v6  b0 gnd pulse(0 5 0 0.1m 0.1m 20 40)
-* u1  a2 plot_v1
-* u3  a1 plot_v1
-* u4  a0 plot_v1
-* u5  b2 plot_v1
-* u6  b1 plot_v1
-* u7  b0 plot_v1
-c2  prod1 gnd 1u
-c4  prod3 gnd 1u
-c6  prod5 gnd 1u
-r2  net-_r2-pad1_ prod1 1k
-r4  net-_r4-pad1_ prod3 1k
-r6  net-_r6-pad1_ prod5 1k
-* u15  prod5 plot_v1
-* u13  prod3 plot_v1
-* u11  prod1 plot_v1
-* u9  net-_u2-pad7_ net-_u2-pad8_ net-_u2-pad9_ net-_u2-pad10_ net-_u2-pad11_ net-_u2-pad12_ net-_r6-pad1_ net-_r5-pad1_ net-_r4-pad1_ net-_r3-pad1_ net-_r2-pad1_ net-_r1-pad1_ dac_bridge_6
-c1  prod0 gnd 1u
-r1  net-_r1-pad1_ prod0 1k
-* u10  prod0 plot_v1
-r5  net-_r5-pad1_ prod4 1k
-c5  prod4 gnd 1u
-* u14  prod4 plot_v1
-c3  prod2 gnd 1u
-r3  net-_r3-pad1_ prod2 1k
-* u12  prod2 plot_v1
-a1 [net-_u2-pad1_ net-_u2-pad2_ net-_u2-pad3_ ] [net-_u2-pad4_ net-_u2-pad5_ net-_u2-pad6_ ] [net-_u2-pad7_ net-_u2-pad8_ net-_u2-pad9_ net-_u2-pad10_ net-_u2-pad11_ net-_u2-pad12_ ] u2
-a2 [a2 a1 a0 b2 b1 b0 ] [net-_u2-pad1_ net-_u2-pad2_ net-_u2-pad3_ net-_u2-pad4_ net-_u2-pad5_ net-_u2-pad6_ ] u8
-a3 [net-_u2-pad7_ net-_u2-pad8_ net-_u2-pad9_ net-_u2-pad10_ net-_u2-pad11_ net-_u2-pad12_ ] [net-_r6-pad1_ net-_r5-pad1_ net-_r4-pad1_ net-_r3-pad1_ net-_r2-pad1_ net-_r1-pad1_ ] u9
-* Schematic Name:                             mayur_wallace, NgSpice Name: mayur_wallace
-.model u2 mayur_wallace(rise_delay=1.0e-9 fall_delay=1.0e-9 input_load=1.0e-12 instance_id=1 ) 
-* Schematic Name:                             adc_bridge_6, NgSpice Name: adc_bridge
-.model u8 adc_bridge(in_low=1.0 in_high=2.0 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
-* Schematic Name:                             dac_bridge_6, NgSpice Name: dac_bridge
-.model u9 dac_bridge(out_low=0.0 out_high=5.0 out_undef=0.5 input_load=1.0e-12 t_rise=1.0e-9 t_fall=1.0e-9 ) 
-.tran 0.1e-00 40e-00 0e-00
-
-* Control Statements 
+Vdd 1 0 dc 5V
+Va 10 0 pulse(0 5 0 0 0 16ns 32ns)
+Vb 11 0 dc 5V
+Vc 12 0 dc 5V
+Vd 13 0 dc 5V
+xa 10 14 1 inverter
+xb 11 15 1 inverter
+xc 12 16 1 inverter
+xd 13 17 1 inverter
+xa_xor_b 10 11 14 15 18 pass_xor
+xb_xor_c 11 12 15 16 19 pass_xor
+xc_xor_d 12 13 16 17 20 pass_xor
+xd_and_d 13 13 17 21 pass_and
+.tran 0.1ns 32ns
 .control
 run
-print allv > plot_data_v.txt
-print alli > plot_data_i.txt
-plot v(a2) v(a1)+6 v(a0)+12 v(b2)+18 v(b1)+2 v(b0)+30 v(prod5)+36 v(prod3)+42 v(prod1)+48 v(prod0)+54 v(prod4)+60 v(prod2)+66
-.endc
+plot V(10) 
+plot V(11) 
+plot V(12) 
+plot V(13) 
+plot V(18)
+plot V(19)
+plot V(20)
+plot V(21)
+.endc 
 .end
 
 
-## Waveforms
-<img width="1340" alt="Screenshot 2022-03-07 at 8 06 01 PM" src="https://user-images.githubusercontent.com/59500283/157094948-38474f65-1df7-495b-a86c-1bbf85e27c6e.png">
+## Ngspice Output Waveforms
 
-Using GAW We Plot a0,a1,a2,b0,b1,b2,prod0,prod1,prod2,prod3,prod4,prod5 in Different Planes.
-## Using_GAW
-<img width="1436" alt="Screenshot 2022-03-07 at 8 11 04 PM" src="https://user-images.githubusercontent.com/59500283/157095200-ae6d6039-8e81-41bd-8fa2-8e8540c6e32c.png">
-<img width="1439" alt="Screenshot 2022-03-07 at 8 27 15 PM" src="https://user-images.githubusercontent.com/59500283/157095226-568362ab-c78c-484a-a63f-73b3c89b98c1.png">
+# B0
+
+<img width="802" alt="B0" src="https://user-images.githubusercontent.com/59500283/161847825-c5ec3078-5b55-40ec-92a4-a391b9f84e16.png">
+
+
+# B1
+
+<img width="683" alt="B1" src="https://user-images.githubusercontent.com/59500283/161847869-d0fbc1b7-0ab1-468e-b707-848694b0a7dd.png">
+
+
+# B2
+
+<img width="683" alt="B2" src="https://user-images.githubusercontent.com/59500283/161847903-dcc183ce-6838-4b0b-9481-de70dc7088bc.png">
+
+
+# B3
+
+
+<img width="652" alt="B3" src="https://user-images.githubusercontent.com/59500283/161847966-51909b37-06f8-48e3-8c27-de549dc8329f.png">
+
+
+# G0
+
+
+<img width="674" alt="G0" src="https://user-images.githubusercontent.com/59500283/161848117-953d1024-1055-474a-90e6-7cf53daf9be6.png">
+
+
+
+# G1
+
+
+<img width="672" alt="G1" src="https://user-images.githubusercontent.com/59500283/161848144-57c48ff6-86ef-4a29-b7ba-3cbfa33301cb.png">
+
+
+# G2
+
+
+<img width="668" alt="G2" src="https://user-images.githubusercontent.com/59500283/161848164-4e5e22ef-58bb-40de-8bdc-5d255cde6056.png">
+
+
+# G3
+
+
+<img width="641" alt="G3" src="https://user-images.githubusercontent.com/59500283/161848187-d8572353-11c1-46d9-9f0f-d85e11ba5cc2.png">
+
+
+
+## Layout
+
+Step-1:Make the Layouts of Small Circuits Which we require .
+Circuits Required-
+
+# Inverter (For Inverted Input)
+
+<img width="625" alt="Inverter" src="https://user-images.githubusercontent.com/59500283/161848981-8081be88-ba89-4cb2-98ae-46b319b34106.png">
+
+# Inverter Output Waveform
+
+<img width="1438" alt="Inverter_Waveform" src="https://user-images.githubusercontent.com/59500283/161849051-0ad8dd3a-1981-4fbb-b99a-b1007e5e9339.png">
+
+# Xor Gate
+
+<img width="717" alt="Xor_Layout" src="https://user-images.githubusercontent.com/59500283/161849097-844caa1f-50bf-4d39-bd44-f8614a27614f.png">
+
+
+# XOR Output Waveform
+
+<img width="1438" alt="Xor_Waveform" src="https://user-images.githubusercontent.com/59500283/161849174-1430971b-a184-40d3-8a78-68c6949ca041.png">
+
+Step-2:Now just make multiple copies of it as per requirenment and make the connections accordingly.
+
+# Final Layout
+
+<img width="411" alt="Final_Layout" src="https://user-images.githubusercontent.com/59500283/161849324-a99c5a5c-732b-4969-8b20-6e27919486b9.png">
+
+# Final Output Waveform
+
+<img width="1440" alt="Final_Layout_Waveform" src="https://user-images.githubusercontent.com/59500283/161849371-883714f1-f41e-45d2-b71d-7f5cacd035e7.png">
 
 
 ## Conclusion
-Thus ,The Multiplication for a Two 3_Bit Numbers is achieved using Wallace Multiplier.
+Thus , The Netlist and the Layout of Binary to Grey Code Converter is Achieved.
 
 ## Author
 Mayur Dongre , Indian Institute of Information Technoology Nagpur.
+
 ## Acknowledgement
-1. Kunal Ghosh, Co-founder, VSD Corp. Pvt. Ltd. - kunalpghosh@gmail.com
-2. Sameer Durgoji, NIT Karnataka
-3. https://esim.marathoniitb.in/
+Dr Paritosh D. Peshwe (IIIT Nagpur)
+
 ## References
-  1)Wikipedia-https://en.wikipedia.org/wiki/Wallace_tree
-
-  2)Youtube Video -https://www.youtube.com/watch?v=lcPIMvI57dM&t=114s
-
-  3)PriyankaMishraandSeemaNayak.AStudyon Wallace Tree Multiplier. https://www.researchgate.net/publication/32720922 
+Modern Digital Electronics by RK Jain
 
   
