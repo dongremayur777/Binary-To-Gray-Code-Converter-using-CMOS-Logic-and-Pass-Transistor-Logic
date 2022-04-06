@@ -251,4 +251,6 @@ Dr Paritosh D. Peshwe (IIIT Nagpur)
 ## References
 Modern Digital Electronics by RK Jain
 
+GFG-https://www.geeksforgeeks.org/code-converters-binary-to-from-gray-code/
+
   
