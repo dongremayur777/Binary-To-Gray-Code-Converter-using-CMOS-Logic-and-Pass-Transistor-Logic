@@ -35,11 +35,11 @@ Gray code is the most popular of the unit distance codes, but it is not suitable
 
 ## Kmaps
 
+![KMAP](https://user-images.githubusercontent.com/59500283/161933708-727277d5-439f-4199-8556-633960ff3058.jpg)
 
-![G0_Kmap](https://user-images.githubusercontent.com/59500283/161847052-df6d40b2-1cea-4ad7-95f0-64e88fb98e00.jpeg)
-![G1_Kmap](https://user-images.githubusercontent.com/59500283/161847160-2f1fc9f7-4f22-4fdd-8c8b-6463e79caf4a.jpeg)
-![G2_Kmap](https://user-images.githubusercontent.com/59500283/161847171-4ef300f5-0534-4a56-a359-7752a643c840.jpeg)
-![G3_Kmap](https://user-images.githubusercontent.com/59500283/161847183-94f1582f-f480-4bac-b162-e1d6cc0390f8.jpeg)
+
+![KMAP_1](https://user-images.githubusercontent.com/59500283/161933620-6cfbe1d0-9659-476f-ac68-d1cdc02eac47.jpg)
+
 
 
 ## Minimized Circuit 
@@ -251,6 +251,5 @@ Dr Paritosh D. Peshwe (IIIT Nagpur)
 ## References
 Modern Digital Electronics by RK Jain
 
-GFG-https://www.geeksforgeeks.org/code-converters-binary-to-from-gray-code/
 
   
