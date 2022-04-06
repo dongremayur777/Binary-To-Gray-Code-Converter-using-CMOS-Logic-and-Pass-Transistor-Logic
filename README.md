@@ -71,50 +71,89 @@ Step-3 : Writing the Netlist for each Sub-Circuit and merging them according to 
 ## Netlist
 
 **Binary To Grey Code Conversion
+
 .subckt inverter 1 2 3
+
 mp 2 1 3 3 pmod w=100u l=1u
+
 mn 2 1 0 0 nmod w=40u l=1u
+
 .model pmod pmos Vto=-1V Kp=80u
+
 .model nmod nmos Vto=1V Kp=200u
+
 .ends
 
 .subckt pass_and 1 2 3 4
+
 m1 1 2 4 4 nmod w=40u l=1u
+
 m2 2 3 4 4 nmod w=40u l=1u
+
 .model nmod nmos Vto=1 Kp=200u
+
 .ends
 
 .subckt pass_xor 1 2 3 4 5
+
 m1 1 4 5 5 nmod w=40u l=1u
+
 m2 3 2 5 5 nmod w=40u l=1u
+
 .model nmod nmos Vto=1V Kp=200u
+
 .ends
 
 Vdd 1 0 dc 5V
+
 Va 10 0 pulse(0 5 0 0 0 16ns 32ns)
+
 Vb 11 0 dc 5V
+
 Vc 12 0 dc 5V
+
 Vd 13 0 dc 5V
+
 xa 10 14 1 inverter
+
 xb 11 15 1 inverter
+
 xc 12 16 1 inverter
+
 xd 13 17 1 inverter
+
 xa_xor_b 10 11 14 15 18 pass_xor
+
 xb_xor_c 11 12 15 16 19 pass_xor
+
 xc_xor_d 12 13 16 17 20 pass_xor
+
 xd_and_d 13 13 17 21 pass_and
+
 .tran 0.1ns 32ns
+
 .control
+
 run
+
 plot V(10) 
+
 plot V(11) 
+
 plot V(12) 
+
 plot V(13) 
+
 plot V(18)
+
 plot V(19)
+
 plot V(20)
+
 plot V(21)
+
 .endc 
+
 .end
 
 
