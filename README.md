@@ -104,15 +104,17 @@ m2 3 2 5 5 nmod w=40u l=1u
 
 .ends
 
+
+
 Vdd 1 0 dc 5V
 
-Va 10 0 pulse(0 5 0 0 0 16ns 32ns)
+Va 10 0 pulse(0 5 0 0 0 20ns 40ns)
 
-Vb 11 0 dc 5V
+Vb 11 0 pulse(0 5 0 0 0 15ns 30ns)
 
-Vc 12 0 dc 5V
+Vc 12 0 pulse(0 5 0 0 0 10ns 20ns)
 
-Vd 13 0 dc 5V
+Vd 13 0 pulse(0 5 0 0 0 5ns 10ns)
 
 xa 10 14 1 inverter
 
@@ -136,25 +138,26 @@ xd_and_d 13 13 17 21 pass_and
 
 run
 
-plot V(10) 
+plot A(10) 
 
-plot V(11) 
+plot B(11) 
 
-plot V(12) 
+plot C(12) 
 
-plot V(13) 
+plot D(13) 
 
-plot V(18)
+plot W(18)
 
-plot V(19)
+plot X(19)
 
-plot V(20)
+plot Y(20)
 
-plot V(21)
+plot Z(21)
 
 .endc 
 
 .end
+
 
 
 ## Ngspice Output Waveforms
