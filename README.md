@@ -70,7 +70,122 @@ Step-3 : Writing the Netlist for each Sub-Circuit and merging them according to 
 
 ## Netlist
 
-**Binary To Grey Code Conversion
+# Using CMOS Logic
+
+** Binary_to_Gray
+
+.subckt inverter 1 2 3
+
+mp 2 1 3 3 pmod w=100u l=1u
+
+mn 2 1 0 0 nmod w=40u l=1u
+
+.model pmod pmos Vto=-1V Kp=80u
+
+.model nmod nmos Vto=1V Kp=200u
+
+.ends
+
+.subckt cmos_and 2 3 4 1 
+
+m1 1 2 4 4 nmod w=40u l=1u
+
+m2 2 3 4 4 nmod w=40u l=1u
+
+m5 8 2 9 1 pmod w=100u l=1u
+
+m6 8 3 9 1 pmod w=100u l=1u
+
+.model nmod nmos Vto=1 Kp=200u
+
+.model pmod pmos Vto=-1V Kp=80u
+
+.ends
+
+
+.subckt cmos_xor 2 3 4 5 8 1
+
+m1 7 3 0 0 nmod w=40u l=1u
+
+m2 6 5 0 0 nmod w=40u l=1u
+
+m3 8 2 7 0 nmod w=40u l=1u
+
+m4 8 4 6 0 nmod w=40u l=1u
+
+
+
+m5 8 2 9 1 pmod w=100u l=1u
+
+m6 8 3 9 1 pmod w=100u l=1u
+
+m7 9 4 1 1 pmod w=100u l=1u
+
+m8 9 5 1 1 pmod w=100u l=1u
+
+.model nmod nmos Vto=1V Kp=200u
+
+.model pmod pmos Vto=-1V Kp=80u
+
+.ends
+
+
+Vdd 1 0 dc 5V
+
+Va 10 0 pulse(0 5 0 0 0 20ns 40ns)
+
+Vb 11 0 pulse(0 5 0 0 0 15ns 30ns)
+
+Vc 12 0 pulse(0 5 0 0 0 10ns 20ns)
+
+Vd 13 0 pulse(0 5 0 0 0 5ns 10ns)
+
+xa 10 14 1 inverter
+
+xb 11 15 1 inverter
+
+xc 12 16 1 inverter
+
+xd 13 17 1 inverter
+
+
+xa_xor_b 10 11 14 15 18 1 cmos_xor
+
+xb_xor_c 11 12 15 16 19 1 cmos_xor
+
+xc_xor_d 12 13 16 17 20 1 cmos_xor
+
+xd_and_d 13 13 21 1 cmos_and
+
+.tran 0.1ns 32ns
+
+.control
+
+run
+
+plot A(10) 
+
+plot B(11) 
+
+plot C(12) 
+
+plot D(13) 
+
+plot W(18)
+
+plot X(19)
+
+plot Y(20)
+
+plot Z(21)
+
+.endc 
+
+.end
+
+# Using Pass Transistor Logic
+
+** Binary To Grey Code Conversion
 
 .subckt inverter 1 2 3
 
