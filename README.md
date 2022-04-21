@@ -9,8 +9,10 @@
   * [Netlist](#netlist)
   * [Ngspice Output Waveforms](#ngspice-output-waveforms)
   * [Layout](#layout)
-  * [Final Layout](#final-layout)
-  * [Final CMOS Logic Output Waveform](#final-output-waveform)
+  * [Final CMOS Logic Layout](#final-cmos-logic-layout)
+  * [Final CMOS Logic Output Waveform](#final-cmos-logic-output-waveform)
+  * [Final Passs Transistor Layout](#final-pass-transistor-logic-layout)
+  * [Final Pass Transistor Logic Output Waveform](#final-pass-transistor-logic-output-waveform)
   * [Conclusion](#conclusion)
   * [Author](#author)
   * [Acknowledgement](#acknowledgement)
@@ -348,7 +350,7 @@ Circuits Required-
 
 Step-2:Now just make multiple copies of it as per requirenment and make the connections accordingly.
 
-# Final Cmos Layout
+# Final Cmos Logic Layout
 
 <img width="411" alt="Final_Layout" src="https://user-images.githubusercontent.com/59500283/161849324-a99c5a5c-732b-4969-8b20-6e27919486b9.png">
 
