@@ -10,7 +10,7 @@
   * [Ngspice Output Waveforms](#ngspice-output-waveforms)
   * [Layout](#layout)
   * [Final Layout](#final-layout)
-  * [Final Output Waveform](#final-output-waveform)
+  * [Final CMOS Logic Output Waveform](#final-output-waveform)
   * [Conclusion](#conclusion)
   * [Author](#author)
   * [Acknowledgement](#acknowledgement)
@@ -348,17 +348,28 @@ Circuits Required-
 
 Step-2:Now just make multiple copies of it as per requirenment and make the connections accordingly.
 
-# Final Layout
+# Final Cmos Layout
 
 <img width="411" alt="Final_Layout" src="https://user-images.githubusercontent.com/59500283/161849324-a99c5a5c-732b-4969-8b20-6e27919486b9.png">
 
-# Final Output Waveform
+# Final CMOS Logic Output Waveform
 
+Power Dissipation of CMOS Logic Ciruit is 
 <img width="1440" alt="Final_Layout_Waveform" src="https://user-images.githubusercontent.com/59500283/161849371-883714f1-f41e-45d2-b71d-7f5cacd035e7.png">
+
+# Final Pass Transistor Logic Layout
+
+<img width="1438" alt="Screenshot 2022-04-21 at 11 49 56 AM" src="https://user-images.githubusercontent.com/59500283/164387180-536abaeb-6593-4fe6-8cad-8610dfe638c3.png">
+
+# Final Pass Transistor Logic Output Waveform 
+ 
+Power Dissipation of Pass Transistor Logic Circuit is 22.264 uW
+
+<img width="1440" alt="Screenshot 2022-04-21 at 11 50 23 AM" src="https://user-images.githubusercontent.com/59500283/164387317-e076740f-59f5-48af-bd0f-523a461bb03f.png">
 
 
 ## Conclusion
-Thus , The Netlist and the Layout of Binary to Grey Code Converter is Achieved.
+Thus , The Netlist and the Layout of Binary to Grey Code Converter is Achieved and we can Conclude that Pass transistor logic often uses fewer transistors, runs faster, and requires less power than the same function implemented with the same transistors in fully complementary CMOS logic.
 
 ## Author
 Mayur Dongre , Indian Institute of Information Technoology Nagpur.
