@@ -1,4 +1,4 @@
-# Binary_To_Gray_Code_Converter
+# Binary_To_Gray_Code_Converter_using_CMOS_Logic_and_Pass_Transistor_Logic
 
   * [Abstract](#abstract)
   * [Reference Truth Table](#reference-truth-table)
