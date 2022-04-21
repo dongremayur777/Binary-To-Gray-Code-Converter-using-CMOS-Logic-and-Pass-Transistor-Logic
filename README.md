@@ -354,7 +354,8 @@ Step-2:Now just make multiple copies of it as per requirenment and make the conn
 
 # Final CMOS Logic Output Waveform
 
-Power Dissipation of CMOS Logic Ciruit is 
+Power Dissipation of CMOS Logic Ciruit is 39.701 uW
+
 <img width="1440" alt="Final_Layout_Waveform" src="https://user-images.githubusercontent.com/59500283/161849371-883714f1-f41e-45d2-b71d-7f5cacd035e7.png">
 
 # Final Pass Transistor Logic Layout
