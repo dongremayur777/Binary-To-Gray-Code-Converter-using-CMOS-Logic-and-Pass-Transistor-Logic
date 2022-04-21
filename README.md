@@ -7,7 +7,7 @@
   * [Formation of Minimized Circuit](#minimized-circuit)
   * [Tools Used](#tools-used)
   * [Netlist](#netlist)
-  * [Ngspice Output Waveforms](#ngspice-output-waveforms)
+  * [Ngspice Pass Transistor Output Waveforms](#ngspice-pass-transistor-output-waveforms)
   * [Layout](#layout)
   * [Final CMOS Logic Layout](#final-cmos-logic-layout)
   * [Final CMOS Logic Output Waveform](#final-cmos-logic-output-waveform)
@@ -277,7 +277,7 @@ plot Z(21)
 
 
 
-## Ngspice Output Waveforms
+## Ngspice Pass Transistor Output Waveforms
 
 # B0
 
@@ -324,6 +324,47 @@ plot Z(21)
 
 <img width="641" alt="G3" src="https://user-images.githubusercontent.com/59500283/161848187-d8572353-11c1-46d9-9f0f-d85e11ba5cc2.png">
 
+
+## Ngspice CMOS Logic Output Waveforms
+
+# B0
+
+<img width="705" alt="Screenshot 2022-04-20 at 9 22 24 PM" src="https://user-images.githubusercontent.com/59500283/164389458-67b5c0c9-1454-493a-a3f3-63717d4d791a.png">
+
+
+# B1
+
+<img width="706" alt="Screenshot 2022-04-20 at 9 22 16 PM" src="https://user-images.githubusercontent.com/59500283/164389491-1f37eff3-a4b3-4dbf-a363-df29127b83db.png">
+
+
+# B2
+
+<img width="707" alt="Screenshot 2022-04-20 at 9 22 09 PM" src="https://user-images.githubusercontent.com/59500283/164389529-03d82f99-bda5-4452-b213-8f27069b8992.png">
+
+
+# B3
+
+<img width="701" alt="Screenshot 2022-04-20 at 9 22 02 PM" src="https://user-images.githubusercontent.com/59500283/164389569-66342757-ff32-468a-830c-c780ca036a99.png">
+
+
+# G0
+
+<img width="701" alt="Screenshot 2022-04-20 at 9 21 54 PM" src="https://user-images.githubusercontent.com/59500283/164389596-a4cdbaae-cc78-4d2d-9752-741881e7e91b.png">
+
+
+# G1
+
+<img width="702" alt="Screenshot 2022-04-20 at 9 21 46 PM" src="https://user-images.githubusercontent.com/59500283/164389623-f24e2361-3e34-462d-abe6-d3696df34365.png">
+
+
+# G2
+
+<img width="701" alt="Screenshot 2022-04-20 at 9 20 51 PM" src="https://user-images.githubusercontent.com/59500283/164389649-64a10ddf-aa54-4b12-b815-9e1d837f70ba.png">
+
+
+# G3
+
+<img width="702" alt="Screenshot 2022-04-20 at 9 20 41 PM" src="https://user-images.githubusercontent.com/59500283/164389670-6547f1c2-1488-4222-81ed-1bbb5668f7d2.png">
 
 
 ## Layout
