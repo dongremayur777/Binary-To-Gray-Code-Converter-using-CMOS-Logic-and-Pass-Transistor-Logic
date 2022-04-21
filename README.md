@@ -8,6 +8,7 @@
   * [Tools Used](#tools-used)
   * [Netlist](#netlist)
   * [Ngspice Pass Transistor Output Waveforms](#ngspice-pass-transistor-output-waveforms)
+  * [Ngspice CMOS Logic Output Waveforms](#ngspice-cmos-logic-output-waveforms)
   * [Layout](#layout)
   * [Final CMOS Logic Layout](#final-cmos-logic-layout)
   * [Final CMOS Logic Output Waveform](#final-cmos-logic-output-waveform)
